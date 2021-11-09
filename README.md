@@ -21,3 +21,8 @@ go get github.com/gkertop/jini
 	//ini.SaveTo("test.ini")
 	ini.Save()
 ```
+
+```
+A value:DefaultValue,has:false
+B value:DefaultValue,has:false
+```
