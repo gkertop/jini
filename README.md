@@ -13,16 +13,16 @@ go get github.com/gkertop/jini
 	if err != nil {
 		panic(err.Error())
 	}
-	ini.Set("Section", "Key", "Value")
-	v1, ok := ini.Get("SectionA", "KeyA", "DefaultValue")
+	ini.Set("SectionA", "KeyA", "ValueA")
+	v1, ok := ini.Get("SectionA", "KeyA", "DefaultValueA")
 	fmt.Printf("A value:%v,has:%v\n", v1, ok)
-	v2, ok := ini.Get("SectionB", "KeyB", "DefaultValue")
+	v2, ok := ini.Get("SectionB", "KeyB", "DefaultValueB")
 	fmt.Printf("B value:%v,has:%v\n", v2, ok)
 	//ini.SaveTo("test.ini")
 	ini.Save()
 ```
 
 ```
-A value:DefaultValue,has:false
-B value:DefaultValue,has:false
+A value:ValueA,has:true
+B value:DefaultValueB,has:false
 ```
