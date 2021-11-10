@@ -65,9 +65,9 @@ func NewIni(pFileName string, pCreate bool) (rt *Ini, err error) {
 			kv := &keyValue{}
 			kv.key = strings.TrimSpace(lineStr[:flagIndex])
 			if strings.HasSuffix(lineStr, "\r") {
-				kv.value = lineStr[flagIndex+1 : len(lineStr)-1]
+				kv.value = strings.TrimLeft(lineStr[flagIndex+1:len(lineStr)-1], " ")
 			} else {
-				kv.value = lineStr[flagIndex+1:]
+				kv.value = strings.TrimLeft(lineStr[flagIndex+1:], " ")
 			}
 			rt.section[sectionIndex].item = append(rt.section[sectionIndex].item, kv)
 			itemIndex++
