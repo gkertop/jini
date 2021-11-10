@@ -1,3 +1,4 @@
+// Package jini Golang轻量INI操作包
 package jini
 
 import (
