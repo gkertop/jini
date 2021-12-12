@@ -45,6 +45,8 @@ func NewIni(pFileName string, pCreate bool) (rt *Ini, err error) {
 	itemIndex := -1
 	if bytes.HasSuffix(dataLines[0], []byte("\r")) {
 		rt.lineBreak = "\r\n"
+	} else {
+		rt.lineBreak = "\n"
 	}
 	for _, line := range dataLines {
 		lineStr := string(line)
@@ -83,10 +85,17 @@ func NewIni(pFileName string, pCreate bool) (rt *Ini, err error) {
 			rt.section[sectionIndex].item = append(rt.section[sectionIndex].item, kv)
 			itemIndex++
 		} else {
-			if strings.HasSuffix(lineStr, "\r") {
-				rt.section[sectionIndex].item[itemIndex].value += rt.lineBreak + lineStr[:len(lineStr)-1]
+			str := lineStr
+			if strings.HasSuffix(str, "\r") {
+				str = str[:len(str)-1]
+			}
+			if str != "" {
+				rt.section[sectionIndex].item[itemIndex].value += rt.lineBreak + str
 			} else {
-				rt.section[sectionIndex].item[itemIndex].value += rt.lineBreak + lineStr
+				kv := &keyValue{}
+				kv.key = ";;"
+				rt.section[sectionIndex].item = append(rt.section[sectionIndex].item, kv)
+				itemIndex++
 			}
 		}
 	}
